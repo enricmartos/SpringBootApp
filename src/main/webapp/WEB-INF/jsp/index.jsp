@@ -19,6 +19,7 @@
     <ul class="nav navbar-nav">
       <li class="active"><a href="/">All Books</a></li>
       <li><a href="newBook">New Book</a></li>
+      <li><a href="contact">Contact</a></li>
     </ul>
   </div>
 </nav>
