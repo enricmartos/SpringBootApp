@@ -20,6 +20,7 @@
       <li class="active"><a href="/">All Books</a></li>
       <li><a href="newBook">New Book</a></li>
       <li><a href="contact">Contact</a></li>
+      <li><a href="uploadFiles">Upload Files</a></li>
     </ul>
   </div>
 </nav>
@@ -54,7 +55,7 @@
 		   	</table>
 		</c:when>
 		<c:when test="${mode == 'BOOK_EDIT' || mode == 'BOOK_NEW'}">
-			<form action="save" method="POST">
+			<form action="save" method="POST" >
 			<input type="hidden" class="form-control" value="${book.id}" id="id" name="id">
 			    <div class="form-group">
 			      <label for="bookName">Book Name</label>

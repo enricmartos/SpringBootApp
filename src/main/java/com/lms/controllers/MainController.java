@@ -1,6 +1,8 @@
 package com.lms.controllers;
 
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -23,6 +25,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
@@ -35,6 +40,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.lms.models.*;
 import com.lms.services.LmsService;
@@ -46,6 +53,7 @@ public class MainController {
 	private LmsService lmsService;
 	
 	private EmailMessage emailMessage;
+	private MultipartFile file;
 	@Value("${gmail.username}")
 	private String username;
 	@Value("${gmail.password}")
@@ -78,13 +86,30 @@ public class MainController {
 		binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-mm-dd"), false));
 	}
 	
-	@PostMapping("/save")
-	public void save(@ModelAttribute Book book, BindingResult bindingResult, HttpServletRequest req, HttpServletResponse res ) throws IOException {
+	@RequestMapping(value="/save", method=RequestMethod.POST)
+	public void save(@ModelAttribute Book book, BindingResult bindingResult, HttpServletRequest req, HttpServletResponse res) throws IOException {
 		lmsService.save(book);
 		req.setAttribute("books", lmsService.findAllBooks());
 		req.setAttribute("mode", "BOOK_VIEW");
 		
 		res.sendRedirect("/");
+	}
+	
+	@RequestMapping(value="/upload", method=RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE) 
+	public void uploadFile(@RequestParam("file") MultipartFile file, HttpServletRequest req, HttpServletResponse res ) throws IOException {
+		//Destiny directory where the file will be stored
+		File convertFile = new File("C:\\Users\\Enri\\Documents\\workspace-sts-3.9.4.RELEASE\\FileUploadDemo\\" + file.getOriginalFilename());
+		convertFile.createNewFile();
+		FileOutputStream fout = new FileOutputStream(convertFile);
+		fout.write(file.getBytes());
+		fout.close();
+		
+		req.setAttribute("books", lmsService.findAllBooks());
+		req.setAttribute("mode", "BOOK_VIEW");
+		
+		res.sendRedirect("/");
+		
+		//return new ResponseEntity<>("File uploaded successfully", HttpStatus.OK);
 	}
 	
 	@GetMapping("/newBook")
@@ -99,8 +124,13 @@ public class MainController {
 		return "contact";
 	}
 	
-	//@RequestMapping(value="/send", method = RequestMethod.POST)
-	@PostMapping("/send")
+	@GetMapping("/uploadFiles")
+	public String upload(HttpServletRequest req) {
+		req.setAttribute("file", file);
+		return "uploadFile";
+	}
+	
+	@RequestMapping(value="/send", method = RequestMethod.POST)
 	//public void sendEmail(@RequestBody EmailMessage emailMessage, HttpServletRequest req, HttpServletResponse res) throws AddressException, MessagingException, IOException {
 	public void sendEmail(@ModelAttribute EmailMessage email, BindingResult bindingResult, HttpServletRequest req, HttpServletResponse res ) throws IOException, AddressException, MessagingException {
 		sendMail(email);
