@@ -2,7 +2,7 @@
 
 ## Description
 
-This application is a library management system which allows you to see, edit and delete all book entries. You can add a new book as well. 
+This application is a library management system which allows you to see, edit and delete all book entries. You can add new books as well. 
 
 ## Core technologies
 
