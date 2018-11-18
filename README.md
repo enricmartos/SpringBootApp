@@ -2,40 +2,34 @@
 
 ## Description
 
-This application is a library management system which allows you to see, edit and delete all book entries. You can add new books as well. 
-
-## Core technologies
-
-*Front-end*
-
-- JSP (JavaServer Pages)
-- Bootstrap
-
-*Back-end*
-
-- Spring Boot
-
-*Database*
-
-- MySQL
-
-*Server*
-
-- Apache Tomcat (default embedded server provided by Spring Boot)
-
-*Dependency management tool*
-
-- Maven
-
-*IDE*
-
-- Spring Tool Suite
-
+This application is a library management system which allows you to see, edit and delete all book entries. You can add new books as well. Besides, you will receive a Welcome Email after submiting your email on Contact section.
 
 ## Personal goals
 
 - Get familiar with Spring Boot framework and learn how to perform basic CRUD operations
 - Implement a simple microservice such as a mail sender by using the Spring Boot Rest API
+
+## Core technologies
+
+*Front-end*
+- JSP (JavaServer Pages)
+- Bootstrap
+
+*Back-end*
+- Spring Boot
+- Hibernate (as a JPA framework)
+
+*Database*
+- MySQL
+
+*Server*
+- Apache Tomcat (default embedded server provided by Spring Boot)
+
+*Dependency management tool*
+- Maven
+
+*IDE*
+- Spring Tool Suite
 
 ## Build setup
 
@@ -49,7 +43,7 @@ File -> Import -> Git -> Projects from Git -> Existing local repository -> Add $
 
 - MySQL and MySQL Workbench must be already installed in your machine. Otherwise, you will have to install them. Please notice that the default parameters (port, username and password) to enable the MySQL connection are defined on application.properties file. So, feel free to edit them in order to match one of your MySQL connections.
 
-- Set the values of the gmail properties (username, password, subject and body) specified on application.properties file as well.
+- Set the values of the gmail properties (username, password, subject and body) specified on application.properties file as well. This gmail account is the one in charge of sending the Welcome Email.
 
 ```
 # Create the db
