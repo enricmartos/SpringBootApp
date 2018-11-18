@@ -25,3 +25,10 @@ CREATE SCHEMA `lmsdb` ;
 - Run the project as Spring Boot App
 
 - Open your browser and test the application on *localhost:8080*
+
+## References
+
+I have accomplished the aforementioned goals thanks to the following courses:
+
+- [Spring Boot + Spring MVC + JPA](https://www.youtube.com/watch?v=II8V0_ilRbU&list=PLdJYl6XU45uLIHaPBQEj-cEMynAl0oeiz&index=1)
+- [Sending Email with Spring Boot Rest API - Gmail Transport Layer Security](https://www.youtube.com/watch?v=G4PUeYbqO80)
