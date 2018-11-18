@@ -1,4 +1,4 @@
-# SpringBootApp
+# Simple library
 
 ## Description
 
