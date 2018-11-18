@@ -14,7 +14,7 @@ File -> Import -> Git -> Projects from Git -> Existing local repository -> Add $
 
 - MySQL and MySQL Workbench must be already installed in your machine. Otherwise, you will have to install them. Please notice that the default parameters (port, username and password) to enable the MySQL connection are defined on application.properties file. So, feel free to edit them in order to match one of your MySQL connections.
 
-- Set the values of the gmail properties (username and password) specified on application.properties file as well.
+- Set the values of the gmail properties (username, password, subject and body) specified on application.properties file as well.
 
 ```
 # Create the db
