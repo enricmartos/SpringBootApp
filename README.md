@@ -34,7 +34,7 @@ This application is a library management system which allows you to see, edit an
 
 ## Personal goals
 
-- Get familiar with the Spring Boot framework and learn how to perform the basic CRUD operations
+- Get familiar with Spring Boot framework and learn how to perform basic CRUD operations
 - Implement a simple microservice such as a mail sender by using the Spring Boot Rest API
 
 ## Build setup
