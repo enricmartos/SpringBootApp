@@ -53,11 +53,15 @@ public class MainController {
 	private LmsService lmsService;
 	
 	private EmailMessage emailMessage;
-	private MultipartFile file;
 	@Value("${gmail.username}")
 	private String username;
 	@Value("${gmail.password}")
 	private String password;
+	@Value("${gmail.subject}")
+	private String subject;
+	@Value("${gmail.body}")
+	private String body;
+	
 	
 	@GetMapping("/")
 	public String init(HttpServletRequest req) {
@@ -95,23 +99,6 @@ public class MainController {
 		res.sendRedirect("/");
 	}
 	
-	@RequestMapping(value="/upload", method=RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE) 
-	public void uploadFile(@RequestParam("file") MultipartFile file, HttpServletRequest req, HttpServletResponse res ) throws IOException {
-		//Destiny directory where the file will be stored
-		File convertFile = new File("C:\\Users\\Enri\\Documents\\workspace-sts-3.9.4.RELEASE\\FileUploadDemo\\" + file.getOriginalFilename());
-		convertFile.createNewFile();
-		FileOutputStream fout = new FileOutputStream(convertFile);
-		fout.write(file.getBytes());
-		fout.close();
-		
-		req.setAttribute("books", lmsService.findAllBooks());
-		req.setAttribute("mode", "BOOK_VIEW");
-		
-		res.sendRedirect("/");
-		
-		//return new ResponseEntity<>("File uploaded successfully", HttpStatus.OK);
-	}
-	
 	@GetMapping("/newBook")
 	public String newBook(HttpServletRequest req) {
 		req.setAttribute("mode", "BOOK_NEW");
@@ -122,12 +109,6 @@ public class MainController {
 	public String contact(HttpServletRequest req) {
 		req.setAttribute("email", emailMessage);
 		return "contact";
-	}
-	
-	@GetMapping("/uploadFiles")
-	public String upload(HttpServletRequest req) {
-		req.setAttribute("file", file);
-		return "uploadFile";
 	}
 	
 	@RequestMapping(value="/send", method = RequestMethod.POST)
@@ -159,28 +140,23 @@ public class MainController {
 				}
 		});
 		
-		
 		//Setting the fields of the email message
 		Message msg = new MimeMessage(session);		
 		msg.setFrom(new InternetAddress(username, false));
 		
 		msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(emailMessage.getTo_address()));
 		System.out.println("Flag sendMail");
-		msg.setSubject(emailMessage.getSubject());
-		msg.setContent(emailMessage.getBody(), "text/html");
+		msg.setSubject(subject);
+		msg.setContent(body, "text/html");
 		msg.setSentDate(new Date());
 		
 		Transport.send(msg);
 	}
-	
-	
-	
 	
 	@GetMapping("/deleteBook")
 	public void deleteBook(@RequestParam long id, HttpServletRequest req, HttpServletResponse res) throws IOException {
 		lmsService.delete(id);
 		res.sendRedirect("/");
 	}
-	
 
 }

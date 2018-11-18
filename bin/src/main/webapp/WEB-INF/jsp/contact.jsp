@@ -14,10 +14,24 @@
 <div class = "container">
 <h1>Mail Sender</h1>
 <form action="send" method="POST">
+<img src="/img/1.jpg"></img>
 	    <div class="form-group">
 	      <label for="to_address">Email</label>
 	      <input type="text" class="form-control" value="${email.to_address}"  id="to_address" name="to_address">
 	    </div>
+	    <div class="form-group">
+	      <label for="subject">Subject</label>
+	      <input type="text" class="form-control" value="${email.subject}"  id="subject" name="subject">
+	    </div>
+	    <div class="form-group">
+	      <label for="body">Message</label>
+	      <input type="text" class="form-control" value="${email.body}" id="body" name="body">
+	    </div>
+	    <!--  
+	    <div class="form-group">
+	      <label for="file">File</label>
+	      <input type="file" name="file" id="file">
+	    </div> -->
 	    <button type="submit" class="btn btn-default">Submit</button>
 	  </form>
 </div>
