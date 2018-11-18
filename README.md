@@ -2,6 +2,8 @@
 
 ## Description
 
+This application is a library management system which allows you to see, edit and delete all book entries. You can add a new book as well. 
+
 # Build setup
 
 - Clone this repo to your local machine. If you use Spring Tool Suite as IDE, open this project there:
