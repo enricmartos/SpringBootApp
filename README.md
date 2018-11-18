@@ -7,7 +7,7 @@ This application is a library management system which allows you to see, edit an
 ## Personal goals
 
 - To get familiar with Spring Boot framework and learn how to perform basic CRUD operations
-- To acquire experience with ORM and JPA
+- To acquire experience with ORM (Object-Relational Mapping) and JPA (Java Persistence API)
 - To implement a simple microservice such as a mail sender by using the Spring Boot Rest API
 
 ## Core technologies
